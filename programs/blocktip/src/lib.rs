@@ -9,9 +9,13 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 pub mod blocktip {
     use super::*;
 
-    pub fn init_profile(ctx: Context<InitProfile>, royalty: bool) -> Result<()> {
+    pub fn init_profile(
+        ctx: Context<InitProfile>,
+        royalty: bool,
+        donation_address: Pubkey,
+    ) -> Result<()> {
         let profile = &mut ctx.accounts.profile;
-        profile.address = *ctx.accounts.signer.to_account_info().key;
+        profile.donation_address = donation_address;
         profile.royalty = royalty;
         profile.total_donations = 0;
         profile.bump = *ctx.bumps.get("profile").unwrap();
@@ -72,7 +76,7 @@ impl BlockTip {
 
 #[account]
 pub struct Profile {
-    address: Pubkey,
+    donation_address: Pubkey,
     royalty: bool,
     total_donations: u64,
     bump: u8,
