@@ -1,5 +1,6 @@
 import * as anchor from "@project-serum/anchor";
 import { Program } from "@project-serum/anchor";
+import { PublicKey } from "@solana/web3.js";
 import { assert } from 'chai';
 import { Blocktip } from "../target/types/blocktip";
 
@@ -13,15 +14,22 @@ describe("blocktip", () => {
 
   it("Initializes Profile!", async () => {
     // Add your test here.
+    const [userProfilePDA, _] = await PublicKey
+      .findProgramAddress(
+        [
+          anchor.utils.bytes.utf8.encode("profile"),
+          program.provider.wallet.publicKey.toBuffer(),
+        ],
+        program.programId,
+      )
     await program.methods.initProfile(true)
       .accounts({
-        profile: profile.publicKey
+        profile: userProfilePDA
       })
-      .signers([profile]) // problem here is that it needs to be for wallet signer
       .rpc()
     
     
-    const profileAccount = await program.account.profile.fetch(profile.publicKey)
+    const profileAccount = await program.account.profile.fetch(userProfilePDA)
     // ts-ignore (provider does contain wallet)
     assert.isTrue(profileAccount.address.equals(program.provider.wallet.publicKey))
     assert.isTrue(profileAccount.royalty)

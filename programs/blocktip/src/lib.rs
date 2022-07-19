@@ -14,6 +14,7 @@ pub mod blocktip {
         profile.address = *ctx.accounts.signer.to_account_info().key;
         profile.royalty = royalty;
         profile.total_donations = 0;
+        profile.bump = *ctx.bumps.get("profile").unwrap();
         Ok(())
     }
 
@@ -30,7 +31,12 @@ pub mod blocktip {
 
 #[derive(Accounts)]
 pub struct InitProfile<'info> {
-    #[account(init, payer = signer, space = Profile::LEN)]
+    #[account(
+        init,
+        payer = signer,
+        space = Profile::LEN,
+        seeds = [b"profile", signer.key().as_ref()], bump
+    )]
     pub profile: Account<'info, Profile>,
     #[account(mut)]
     pub signer: Signer<'info>,
@@ -69,10 +75,12 @@ pub struct Profile {
     address: Pubkey,
     royalty: bool,
     total_donations: u64,
+    bump: u8,
 }
 impl Profile {
     pub const LEN: usize = 8 + // anchor discriminator 
         32 + // address (supposedly wallet address of profile)
         1 + // royalty
-        8; // total_donations
+        8 +  // total_donations
+        1; // bump
 }
