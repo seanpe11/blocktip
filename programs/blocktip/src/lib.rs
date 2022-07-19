@@ -27,7 +27,6 @@ pub mod blocktip {
         block_tip.from = *ctx.accounts.signer.to_account_info().key;
         block_tip.amount = amount;
         block_tip.message = message;
-        block_tip.royalty = false;
 
         Ok(())
     }
@@ -63,7 +62,6 @@ pub struct BlockTip {
     mint: Pubkey,
     amount: u64,
     message: String,
-    royalty: bool,
 }
 impl BlockTip {
     pub const LEN: usize = 8 + // anchor discriminator 
