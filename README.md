@@ -2,6 +2,7 @@
 - [ ] Finish smart contract
 - [ ] Init instructions for profile
 - [ ] Instructions for sending a tip
+- [ ] Use PDAs to create profile
 - [ ] Token transfers native
 - [ ] Token transfers spl-token
 - [ ] Front-end
