@@ -2,7 +2,7 @@
 seeds = false
 skip-lint = false
 [programs.localnet]
-blocktip = "J12y7DHEGtNzGxWrW5cDNVdj546HgLkit89BSbfjcYoo"
+blocktip = "AhXmrTCwoB2A1xBfSu6trRXysGvaaA485PY3sLQPUzhC"
 
 [registry]
 url = "https://api.apr.dev"

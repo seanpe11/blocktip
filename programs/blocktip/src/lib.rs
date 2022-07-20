@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_spl::token::{self, Token, TokenAccount, Transfer};
-declare_id!("J12y7DHEGtNzGxWrW5cDNVdj546HgLkit89BSbfjcYoo");
+declare_id!("AhXmrTCwoB2A1xBfSu6trRXysGvaaA485PY3sLQPUzhC");
 
 #[program]
 pub mod blocktip {
