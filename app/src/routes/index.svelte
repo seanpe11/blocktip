@@ -2,7 +2,7 @@
 	import StartPage from '../components/StartPage.svelte';
 </script>
 
-<div class="md:px-24 lg:px-40 md:mt-40">
+<div class="mt-20 px-3 md:px-24 lg:px-40 md:mt-40">
 	<div class="flex flex-col gap-5 text-center">
 		<h1 class="text-6xl font-bold text-center">A supporter is worth a thousand followers.</h1>
 
